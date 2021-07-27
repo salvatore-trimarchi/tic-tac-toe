@@ -1,28 +1,42 @@
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+// %            ROOT COMPONENT: App             % 
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+// # COMPONENT BODY # 
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+	<div id="app">
+		<!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
+		<header>
+			<h1>Tic Tac Toe</h1>
+			<span class="txt_1">«Whenever you fight you lose»</span>
+		</header>
+		<main>
+			<Game msg="Title" />
+		</main>
+		<footer>
+			<div class="txt_1">by Salvatore Trimarchi</div>
+		</footer>
+	</div>
 </template>
 
+// # SOCKETS & PLUGS # 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
 
+// * component socket: HelloWorld * //
+import Game from "./components/Game.vue";
+
+// * component plug: App * //
 export default {
-  name: "App",
-  components: {
-    HelloWorld,
-  },
+	name: "App",
+	components: {
+		Game,
+	},
 };
+
 </script>
 
+// # STYLE MANAGEMENT # 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+// * MAIN STYLE * //
+@import "./assets/scss/app.scss"; 
 </style>
