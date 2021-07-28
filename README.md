@@ -1,4 +1,8 @@
-# tic-tac-toe
+# Tic Tac Toe
+
+This is a single page application, based on Vue CLI.
+
+Once downloaded in a local folder, it is available within a local server environment (such as MAMP, WAMP, XAMPP).
 
 ## Project setup
 ```
@@ -22,3 +26,9 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## License
+
+This application is open-sourced software licensed under the [Zero-Clause BSD license](https://opensource.org/licenses/0BSD).
+
+
