@@ -10,6 +10,7 @@
 
 		<div v-if="isGameOn" class="game_box">
 
+			<!-- PLAYER MOVE NOTICE & BUTTONS -->
 			<div class="game_head">
 				<div class="txt_2">
 					<span>Next Move Player:</span>
@@ -19,10 +20,11 @@
 					</div>
 					<div v-else class="next_move_notice">-</div>
 				</div>
-				<div @click="undoMove" class="btn" :class="(playedCells.length > 0) ? '' : 'inactive'">Undo Move</div>
-				<div @click="restartGame" class="btn" :class="(playedCells.length > 0) ? '' : 'inactive'">Restart Game</div>
+				<div @click="undoMove" class="btn" :class="{ inactive: !isGameInProgress }">Undo Move</div>
+				<div @click="restartGame" class="btn" :class="{ inactive: !isGameInProgress }">Restart Game</div>
 			</div>
 			
+			<!-- GAME FIELD -->
 			<div class="game_field card">
 				<div class="grid_box">
 					<div class="grid_cell"
@@ -33,6 +35,7 @@
 						<div v-if="isCellPlayed(cell,playedByOCells)"><i class="far fa-circle"></i></div>
 					</div>
 				</div>
+				<!-- info panel (winner & score) -->
 				<div v-if="isGameOver" class="game_status txt_2">
 					<div class="txt_3"> 
 						<span v-if="winner =='X'">Player <i class="fas fa-times"></i> wins!</span>
@@ -47,7 +50,7 @@
 				</div>
 			</div>
 
-		</div>
+		</div> <!-- game_box -->
 
 	</div>
 </template>
@@ -64,12 +67,12 @@ export default {
 	data() {
 		return {
 			// dynamics
-			isGameOn		: false,				// game activated
-			isGameOver		: false,				// game ended by win or draw
+			isGameOn		: false,				// game activated or not
+			isGameOver		: false,				// game ended by a win/draw or not 
 			// players
-			activePlayer	: 'X',					// next move player X or O (X always moves first)
+			activePlayer	: 'X',					// next move player: X or O (X always moves first)
 			winner			: '',					// winner player: X or O or empty (draw)  
-			score			: {X:0, O:0},			// score for player X and O
+			score			: {X:0, O:0},			// score for both players X and O
 			// cells
 			cells			: [1,2,3,4,5,6,7,8,9],	// base grid cell ids
 			playedCells		: [],					// list of all played cell ids
@@ -110,10 +113,10 @@ export default {
 					this.playedByOCells.push(cell);
 					playerCells = this.playedByOCells;
 				}
-				// check: winner set of cell ids
+				// check: are played cells a winner set?
 				if (this.isWinSet(playerCells))
 					this.setWinner(this.activePlayer);
-				// check: no more unused cells left without winner
+				// check: no more unplayed cells left without winner
 				else if (this.playedCells.length == this.cells.length)
 					this.setWinner('');
 				// chnge turn (in any case)
@@ -138,7 +141,7 @@ export default {
 						// collecting all winning played cell ids
 						this.winPlayedCells = this.winPlayedCells.concat(matchSet);
 						ret = true;
-						// return true; // why doesn't it work this way?
+						// return true; // TODO why doesn't it work this way?
 					}
 				});
 			}
@@ -174,6 +177,14 @@ export default {
 					this.playedByOCells.splice(-1,1);
 			}
 		},
+	},
+	computed: {
+		isGameInProgress() { // game started with at least one move
+			if (this.playedCells.length > 0) 
+				return true;
+			else
+				return false;
+		}	
 	}
 };
 </script>

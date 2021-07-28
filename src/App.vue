@@ -7,7 +7,7 @@
 	<div id="app">
 		<header>
 			<h1>Tic Tac Toe</h1>
-			<span class="txt_1">«Whenever you fight you lose»</span>
+			<span class="txt_1">«Whenever we fight we lose»</span>
 		</header>
 		<main>
 			<Game />
