@@ -11,7 +11,7 @@
 			<span class="txt_1">«Whenever you fight you lose»</span>
 		</header>
 		<main>
-			<Game msg="Title" />
+			<Game />
 		</main>
 		<footer>
 			<div class="txt_1">by Salvatore Trimarchi</div>
@@ -22,7 +22,7 @@
 // # SOCKETS & PLUGS # 
 <script>
 
-// * component socket: HelloWorld * //
+// * component socket: Game * //
 import Game from "./components/Game.vue";
 
 // * component plug: App * //
@@ -37,6 +37,8 @@ export default {
 
 // # STYLE MANAGEMENT # 
 <style lang="scss">
+
 // * MAIN STYLE * //
 @import "./assets/scss/app.scss"; 
+
 </style>

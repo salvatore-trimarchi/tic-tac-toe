@@ -5,9 +5,11 @@
 // # COMPONENT BODY # 
 <template>
 	<div class="container">
-		<!-- <h1>{{ msg }}</h1> -->
+
 		<div v-if="!isGameOn" @click="startGame" class="btn">Game Start</div>
-		<div v-if="isGameOn" class="game">
+
+		<div v-if="isGameOn" class="game_box">
+
 			<div class="game_head">
 				<div class="txt_2">
 					<span>Next Move Player:</span>
@@ -19,15 +21,30 @@
 				</div>
 				<div @click="restartGame" class="btn">Restart Game</div>
 			</div>
+			
 			<div class="game_field card">
-				<div v-if="isGameOn" class="grid_box">
+				<div class="grid_box">
 					<div v-for="cell in cells" :key="cell" @click="clickCell(cell)" class="grid_cell" :class="isGameOver ? getWinClass(cell) : ''">
 						<div v-if="isCellPlayed(cell,playedByXCells)"><i class="fas fa-times"></i></div>
 						<div v-if="isCellPlayed(cell,playedByOCells)"><i class="far fa-circle"></i></div>
 					</div>
 				</div>
+				<div v-if="isGameOver" class="game_status txt_2">
+					<div class="txt_3"> 
+						<span v-if="winner =='X'">Player <i class="fas fa-times"></i> wins!</span>
+						<span v-if="winner =='O'">Player <i class="far fa-circle"></i> wins!</span>
+						<span v-if="winner ==''" >No one wins!</span>
+					</div>
+					<div>
+						<div>Total score</div>
+						<div>Player <i class="fas fa-times"></i>  : {{score.X}}</div>
+						<div>Player <i class="far fa-circle"></i> : {{score.O}}</div>
+					</div>
+				</div>
 			</div>
+
 		</div>
+
 	</div>
 </template>
 
@@ -37,16 +54,15 @@
 // * component socket: ... * //
 // ...
 
-// * component plug: HelloWorld * //
+// * component plug: Game * //
 export default {
 	name: "Game",
-	props: {
-		msg: String,
-	},
 	data() {
 		return {
 			isGameOn		: false,
 			isGameOver		: false,
+			score			: {X:0,O:0},
+			winner			: '',
 			cells			: [1,2,3,4,5,6,7,8,9],
 			playedCells		: [],
 			playedByXCells	: [],
@@ -58,7 +74,6 @@ export default {
 				[1,4,7],[2,5,8],[3,6,9],
 				[1,5,9],[3,5,7]
 			],
-			score: {X:0,O:0},
 		}
 	},
 	methods: {
@@ -69,6 +84,8 @@ export default {
 			this.playedCells	= [];
 			this.playedByXCells = [];
 			this.playedByOCells = [];
+			this.winSet			= [];
+			this.winner			= '';
 			this.activePlayer	= 'X';
 			this.isGameOver 	= false;	
 		},
@@ -83,7 +100,10 @@ export default {
 					this.playedByOCells.push(cell);
 					playerCells = this.playedByOCells;
 				}
-				if (this.isWinSet(playerCells)) this.setWinner(this.activePlayer);
+				if (this.isWinSet(playerCells)) 
+					this.setWinner(this.activePlayer);
+				else if (this.playedCells.length == this.cells.length) 
+					this.setWinner('');
 				this.activePlayer = (this.activePlayer == 'X') ? 'O' : 'X';
 			}
 		},
@@ -97,10 +117,9 @@ export default {
 			let ret = false;
 			if (playedSet.length >= 3) {
 				this.winCellSets.forEach(winSet => {
-					const match = winSet.filter(winEl => playedSet.includes(winEl));
-					if (match.length == 3) {
-						this.winSet = match;
-						console.log('win set',this.winSet);
+					const matchSet = winSet.filter(winEl => playedSet.includes(winEl));
+					if (matchSet.length == 3) {
+						this.winSet = matchSet;
 						ret = true;
 						// return true;
 					}
@@ -111,30 +130,17 @@ export default {
 		},
 		setWinner(winner) {
 			this.isGameOver = true;
-			this.score[winner]++;
-			console.log('winner '+winner);
-			console.log('X:',this.score.X,'- O:',this.score.O);
+			if (winner) {
+				this.score[winner]++;
+				this.winner = winner;
+			}
 		},
 		getWinClass(cell) {
 			if (this.winSet.includes(cell))
 				return 'win_class';
 			else
 				return '';
-		},
-	},
-	computed: {
-		//
-	},
-	created() {
-		// console.log('app created');
-	},
-	mounted() {
-		// console.log('app mounted');
-	},
+		}
+	}
 };
 </script>
-
-// # SCOPED STYLE MANAGEMENT # 
-<style scoped lang="scss">
-	//
-</style>
