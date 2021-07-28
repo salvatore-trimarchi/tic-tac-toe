@@ -11,8 +11,8 @@
 }
 body {
 	font-family: 'Roboto', sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;	// macOS
+	-moz-osx-font-smoothing: grayscale;		// cmacOS+FF
 	background-color: $white;
 	color: $black;
 	font-size: 14px;
@@ -22,13 +22,18 @@ body {
 // % BUTTONS % 
 .btn {
 	padding: 5px 10px;
-	border-radius: 5px;
-	color: $realwhite;
+	margin-left: 15px;
+	border-radius: $radius;
 	background-color: $green;
+	color: $realwhite;
 	cursor: pointer;
 	transition: color 0.2s, background-color 0.2s;
 	&:hover {
 		background-color: $green2;
+	}
+	&.inactive {
+		background-color: $light_grey;
+		cursor: default;
 	}
 }
 
@@ -39,20 +44,20 @@ body {
 }
 .txt_2 {
 	padding: 5px 10px;
-	border-radius: 5px;
+	border-radius: $radius;
 	background-color: $light_grey;
 	font-weight: 500;
 }
 .txt_3 {
 	font-size: 1.7em;
 	line-height: 1.5em;
-	color: $purple;
+	color: $green;
 }
 
 // % CARD % 
 .card {
 	margin: 30px 0;
-	border-radius: 5px;
+	border-radius: $radius;
 	background-color: $realwhite;
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }

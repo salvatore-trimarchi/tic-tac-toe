@@ -21,6 +21,7 @@
 @mixin fx-col-right		{	align-items: flex-end;			}
 @mixin fx-col-between	{	align-content: space-between;	}
 @mixin fx-col-around	{	align-content: space-around;	}
+@mixin fx-self-center	{	align-self: center; 			}
 @mixin fx-grow-1 {	flex-grow: 1;		}
 @mixin fx-grow-2 {	flex-grow: 2;		}
 @mixin fx-wrap   {	flex-wrap: wrap;	}
