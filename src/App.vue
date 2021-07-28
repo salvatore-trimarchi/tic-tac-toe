@@ -5,7 +5,6 @@
 // # COMPONENT BODY # 
 <template>
 	<div id="app">
-		<!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
 		<header>
 			<h1>Tic Tac Toe</h1>
 			<span class="txt_1">«Whenever you fight you lose»</span>

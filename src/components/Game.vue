@@ -41,8 +41,8 @@
 					</div>
 					<div class="score">
 						<div>Total score</div>
-						<div><span>Player <i class="fas fa-times" ></i></span><span>{{score.X}}</span></div>
-						<div><span>Player <i class="far fa-circle"></i></span><span>{{score.O}}</span></div>
+						<div><span>Player</span><span><i class="fas fa-times" ></i></span><span>{{score.X}}</span></div>
+						<div><span>Player</span><span><i class="far fa-circle"></i></span><span>{{score.O}}</span></div>
 					</div>
 				</div>
 			</div>

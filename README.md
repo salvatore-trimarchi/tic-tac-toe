@@ -1,6 +1,6 @@
 # Tic Tac Toe
 
-This is a single page application, based on Vue CLI.
+This is a single page application, based on Vue.js (Vue CLI).
 
 Once downloaded in a local folder, it is available within a local server environment (such as MAMP, WAMP, XAMPP).
 

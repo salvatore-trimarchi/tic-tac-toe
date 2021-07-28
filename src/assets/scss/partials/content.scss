@@ -81,7 +81,10 @@
 								&:first-child {
 									@include fx-self-center;
 								}
-								& > span:nth-child(2) {
+								span > i {
+									margin: 0 5px;
+								}
+								& > span:nth-child(3) {
 									color: $green;
 									margin-left: 10px;
 								}
